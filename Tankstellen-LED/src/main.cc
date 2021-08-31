@@ -15,7 +15,7 @@ void setup()
   TCNT1 = 0;  //initialize counter value to 0
   // set compare match register for 1hz increments
   // OCR1A = 15624; // = (16*10^6) / (1*1024) - 1 (must be <65536)
-  OCR1A = 14; // = (16*10^6) / (1*1024) - 1 (must be <65536)
+  OCR1A = 2; // = (16*10^6) / (1*1024) - 1 (must be <65536)
   // // set compare match register for 1000hz increments
   // OCR1A = 14; // = (16*10^6) / (1000*1024) - 1 (must be <65536)
   // turn on CTC mode

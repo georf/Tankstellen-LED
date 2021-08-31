@@ -30,7 +30,7 @@ void Display::AddBrightnessValue(uint16_t value)
     average = sum / 20;
     if (average > 600)
         average = 600;
-    brightnessSteps = average / 61 + 1;
+    brightnessSteps = average / 68 + 1;
 }
 
 void Display::Brightness()
