@@ -1,0 +1,376 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L MCU_Module:Arduino_Nano_v3.x A1
+U 1 1 6047DD04
+P 5350 3500
+F 0 "A1" H 5350 2411 50  0000 C CNN
+F 1 "Arduino_Nano_v3.x" H 5350 2320 50  0000 C CNN
+F 2 "myself:Arduino_Nano_longpad" H 5350 3500 50  0001 C CIN
+F 3 "http://www.mouser.com/pdfdocs/Gravitech_Arduino_Nano3_0.pdf" H 5350 3500 50  0001 C CNN
+	1    5350 3500
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x10_Female J3
+U 1 1 60488D10
+P 7850 3400
+F 0 "J3" H 7878 3376 50  0000 L CNN
+F 1 "Conn_01x10_Female" H 7878 3285 50  0000 L CNN
+F 2 "myself:IDC-Header_2x05_P2.54mm_Vertical_long_pads" H 7850 3400 50  0001 C CNN
+F 3 "~" H 7850 3400 50  0001 C CNN
+	1    7850 3400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0101
+U 1 1 6048A98C
+P 5350 4500
+F 0 "#PWR0101" H 5350 4250 50  0001 C CNN
+F 1 "GND" H 5355 4327 50  0000 C CNN
+F 2 "" H 5350 4500 50  0001 C CNN
+F 3 "" H 5350 4500 50  0001 C CNN
+	1    5350 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0102
+U 1 1 6048B04D
+P 5250 4500
+F 0 "#PWR0102" H 5250 4250 50  0001 C CNN
+F 1 "GND" H 5255 4327 50  0000 C CNN
+F 2 "" H 5250 4500 50  0001 C CNN
+F 3 "" H 5250 4500 50  0001 C CNN
+	1    5250 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0103
+U 1 1 6049617D
+P 5300 1900
+F 0 "#PWR0103" H 5300 1650 50  0001 C CNN
+F 1 "GND" H 5305 1727 50  0000 C CNN
+F 2 "" H 5300 1900 50  0001 C CNN
+F 3 "" H 5300 1900 50  0001 C CNN
+	1    5300 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+7.5V #PWR0104
+U 1 1 604984EB
+P 5300 1800
+F 0 "#PWR0104" H 5300 1650 50  0001 C CNN
+F 1 "+7.5V" H 5315 1973 50  0000 C CNN
+F 2 "" H 5300 1800 50  0001 C CNN
+F 3 "" H 5300 1800 50  0001 C CNN
+	1    5300 1800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5200 1800 5300 1800
+Wire Wire Line
+	5300 1900 5200 1900
+$Comp
+L power:GND #PWR0105
+U 1 1 604A8BE7
+P 6950 1650
+F 0 "#PWR0105" H 6950 1400 50  0001 C CNN
+F 1 "GND" H 6955 1477 50  0000 C CNN
+F 2 "" H 6950 1650 50  0001 C CNN
+F 3 "" H 6950 1650 50  0001 C CNN
+	1    6950 1650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0106
+U 1 1 604A93C7
+P 5900 2050
+F 0 "#PWR0106" H 5900 1800 50  0001 C CNN
+F 1 "GND" H 5905 1877 50  0001 C CNN
+F 2 "" H 5900 2050 50  0001 C CNN
+F 3 "" H 5900 2050 50  0001 C CNN
+	1    5900 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR0107
+U 1 1 604A9D63
+P 5750 2250
+F 0 "#PWR0107" H 5750 2100 50  0001 C CNN
+F 1 "+5V" H 5765 2423 50  0000 C CNN
+F 2 "" H 5750 2250 50  0001 C CNN
+F 3 "" H 5750 2250 50  0001 C CNN
+	1    5750 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR0108
+U 1 1 604AA8B3
+P 5150 2500
+F 0 "#PWR0108" H 5150 2350 50  0001 C CNN
+F 1 "+5V" H 5165 2673 50  0000 C CNN
+F 2 "" H 5150 2500 50  0001 C CNN
+F 3 "" H 5150 2500 50  0001 C CNN
+	1    5150 2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+7.5V #PWR0109
+U 1 1 604AAE62
+P 5450 2500
+F 0 "#PWR0109" H 5450 2350 50  0001 C CNN
+F 1 "+7.5V" H 5465 2673 50  0000 C CNN
+F 2 "" H 5450 2500 50  0001 C CNN
+F 3 "" H 5450 2500 50  0001 C CNN
+	1    5450 2500
+	1    0    0    -1  
+$EndComp
+NoConn ~ 5250 2500
+$Comp
+L power:GND #PWR0110
+U 1 1 604AFE25
+P 7650 3900
+F 0 "#PWR0110" H 7650 3650 50  0001 C CNN
+F 1 "GND" H 7655 3727 50  0000 C CNN
+F 2 "" H 7650 3900 50  0001 C CNN
+F 3 "" H 7650 3900 50  0001 C CNN
+	1    7650 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0111
+U 1 1 604B055C
+P 7500 3800
+F 0 "#PWR0111" H 7500 3550 50  0001 C CNN
+F 1 "GND" H 7505 3627 50  0000 C CNN
+F 2 "" H 7500 3800 50  0001 C CNN
+F 3 "" H 7500 3800 50  0001 C CNN
+	1    7500 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR0112
+U 1 1 604B0E7A
+P 7650 3000
+F 0 "#PWR0112" H 7650 2850 50  0001 C CNN
+F 1 "+5V" H 7665 3173 50  0000 C CNN
+F 2 "" H 7650 3000 50  0001 C CNN
+F 3 "" H 7650 3000 50  0001 C CNN
+	1    7650 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x03 J4
+U 1 1 604AD6B6
+P 7150 1550
+F 0 "J4" H 7230 1592 50  0000 L CNN
+F 1 "Conn_01x03" H 7230 1501 50  0000 L CNN
+F 2 "myself:Connector 3xPin" H 7150 1550 50  0001 C CNN
+F 3 "~" H 7150 1550 50  0001 C CNN
+	1    7150 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x03 J2
+U 1 1 604AE793
+P 6150 4350
+F 0 "J2" H 6230 4392 50  0000 L CNN
+F 1 "Conn_01x03" H 6230 4301 50  0000 L CNN
+F 2 "myself:Connector 3xPin" H 6150 4350 50  0001 C CNN
+F 3 "~" H 6150 4350 50  0001 C CNN
+	1    6150 4350
+	0    -1   1    0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x02 J1
+U 1 1 604AFEE8
+P 5000 1900
+F 0 "J1" H 4918 1575 50  0000 C CNN
+F 1 "Conn_01x02" H 4918 1666 50  0000 C CNN
+F 2 "myself:Connector 2xPin" H 5000 1900 50  0001 C CNN
+F 3 "~" H 5000 1900 50  0001 C CNN
+	1    5000 1900
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR01
+U 1 1 604BC767
+P 6400 4150
+F 0 "#PWR01" H 6400 3900 50  0001 C CNN
+F 1 "GND" H 6405 3977 50  0000 C CNN
+F 2 "" H 6400 4150 50  0001 C CNN
+F 3 "" H 6400 4150 50  0001 C CNN
+	1    6400 4150
+	1    0    0    -1  
+$EndComp
+NoConn ~ 5850 4200
+NoConn ~ 4850 4200
+NoConn ~ 4850 4100
+NoConn ~ 4850 4000
+NoConn ~ 4850 3900
+NoConn ~ 4850 3800
+NoConn ~ 4850 3600
+NoConn ~ 4850 3500
+NoConn ~ 4850 3300
+NoConn ~ 4850 3000
+NoConn ~ 4850 2900
+Wire Wire Line
+	7650 3800 7500 3800
+Wire Wire Line
+	5850 2900 6300 2900
+Wire Wire Line
+	6300 2900 6300 2650
+Wire Wire Line
+	6400 2650 6400 3000
+Wire Wire Line
+	6400 3000 5850 3000
+Wire Wire Line
+	6950 1550 6400 1550
+Wire Wire Line
+	6400 1550 6400 1600
+Wire Wire Line
+	6950 1450 6300 1450
+Wire Wire Line
+	6300 1450 6300 1600
+NoConn ~ 5850 3800
+NoConn ~ 5850 3900
+$Comp
+L New_Library:Max3232Board U1
+U 1 1 6049B668
+P 6600 2050
+F 0 "U1" H 6675 2023 50  0000 C CNN
+F 1 "Max3232Board" H 6675 2114 50  0000 C CNN
+F 2 "myself:MAX232" H 6600 2050 50  0001 C CNN
+F 3 "" H 6600 2050 50  0001 C CNN
+	1    6600 2050
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5900 2250 5750 2250
+Wire Wire Line
+	6250 4150 6400 4150
+Wire Wire Line
+	6050 4150 6050 4100
+Wire Wire Line
+	5850 4100 6050 4100
+Wire Wire Line
+	6150 4000 6150 4150
+Wire Wire Line
+	5850 4000 6150 4000
+Text GLabel 7650 3100 0    50   Input ~ 0
+D2
+Text GLabel 5850 3100 2    50   Input ~ 0
+D2
+Text GLabel 5850 3200 2    50   Input ~ 0
+D3
+Text GLabel 5850 3300 2    50   Input ~ 0
+D4
+Text GLabel 5850 3400 2    50   Input ~ 0
+D5
+Text GLabel 5850 3500 2    50   Input ~ 0
+D6
+Text GLabel 5850 3600 2    50   Input ~ 0
+D7
+Text GLabel 5850 3700 2    50   Input ~ 0
+D8
+Text GLabel 7650 3300 0    50   Input ~ 0
+D3
+Text GLabel 7650 3500 0    50   Input ~ 0
+D4
+Text GLabel 7650 3700 0    50   Input ~ 0
+D5
+Text GLabel 7650 3600 0    50   Input ~ 0
+D6
+Text GLabel 7650 3400 0    50   Input ~ 0
+D7
+Text GLabel 7650 3200 0    50   Input ~ 0
+D8
+Text GLabel 8900 1550 0    50   Input ~ 0
+D2
+$Comp
+L power:GND #PWR02
+U 1 1 604CD42F
+P 9200 1550
+F 0 "#PWR02" H 9200 1300 50  0001 C CNN
+F 1 "GND" H 9205 1377 50  0000 C CNN
+F 2 "" H 9200 1550 50  0001 C CNN
+F 3 "" H 9200 1550 50  0001 C CNN
+	1    9200 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 604CDBD5
+P 9050 1550
+F 0 "R1" V 8843 1550 50  0000 C CNN
+F 1 "10k" V 8934 1550 50  0000 C CNN
+F 2 "myself:Resistor, L6mm,5holes" V 8980 1550 50  0001 C CNN
+F 3 "~" H 9050 1550 50  0001 C CNN
+	1    9050 1550
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x02 J5
+U 1 1 611E523A
+P 4400 3500
+F 0 "J5" H 4318 3175 50  0000 C CNN
+F 1 "Conn_01x02" H 4318 3266 50  0000 C CNN
+F 2 "myself:Connector 2xPin" H 4400 3500 50  0001 C CNN
+F 3 "~" H 4400 3500 50  0001 C CNN
+	1    4400 3500
+	0    1    -1   0   
+$EndComp
+Wire Wire Line
+	4850 3700 4400 3700
+$Comp
+L power:GND #PWR0113
+U 1 1 611E9F68
+P 4300 3700
+F 0 "#PWR0113" H 4300 3450 50  0001 C CNN
+F 1 "GND" H 4305 3527 50  0000 C CNN
+F 2 "" H 4300 3700 50  0001 C CNN
+F 3 "" H 4300 3700 50  0001 C CNN
+	1    4300 3700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR0114
+U 1 1 611EA351
+P 4600 4150
+F 0 "#PWR0114" H 4600 4000 50  0001 C CNN
+F 1 "+5V" H 4615 4323 50  0000 C CNN
+F 2 "" H 4600 4150 50  0001 C CNN
+F 3 "" H 4600 4150 50  0001 C CNN
+	1    4600 4150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 611EB757
+P 4400 3850
+F 0 "R2" H 4470 3896 50  0000 L CNN
+F 1 "R" H 4470 3805 50  0000 L CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal" V 4330 3850 50  0001 C CNN
+F 3 "~" H 4400 3850 50  0001 C CNN
+	1    4400 3850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4400 4000 4400 4150
+Wire Wire Line
+	4400 4150 4600 4150
+Connection ~ 4400 3700
+$EndSCHEMATC
