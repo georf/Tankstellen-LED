@@ -1,6 +1,6 @@
 #include <serial_control.h>
 
-SerialControl::SerialControl(void (*pCallbackStartF)(), void (*pCallbackWaitF)(), void (*pCallbackShowF)(SerialControl *))
+SerialControl::SerialControl(void (*pCallbackStartF)(), void (*pCallbackWaitF)(), void (*pCallbackShowF)(uint32_t lastDeciTime, uint8_t lastLine))
 {
     pCallbackStart = pCallbackStartF;
     pCallbackWait = pCallbackWaitF;
@@ -16,67 +16,145 @@ void SerialControl::Startup()
 
 void SerialControl::Handle()
 {
-    char control;
+    byte control;
     if (Serial.available())
     {
         control = Serial.read();
-        Serial.print(control);
-        if (control == NEXT_LINE || control == '\r')
+        Serial.write(control);
+
+        currentLine[currentLineIndex] = control;
+        currentLineIndex++;
+
+        if (currentLineIndex > 49)
         {
-            transmitMode = MODE_READY;
+            currentLineIndex = 0;
         }
-        else if (transmitMode == MODE_READY && control == MODE_CHAR_START)
+        else if (control == '\r' || control == '\n')
         {
-            transmitMode = MODE_CONTROL;
-            return pCallbackStart();
-        }
-        else if (transmitMode == MODE_READY && control == MODE_CHAR_WAIT)
-        {
-            transmitMode = MODE_CONTROL;
-            return pCallbackWait();
-        }
-        else if (transmitMode == MODE_READY && (control == MODE_CHAR_1 || control == MODE_CHAR_2))
-        {
-            transmitMode = MODE_TIME;
-            receivedPart = (int)control - 49;
-            receivedTimePosition = 0;
-        }
-        // if control is a number
-        else if (transmitMode == MODE_TIME && control > 47 && control < 58)
-        {
-            receivedTime[receivedPart][receivedTimePosition] = control;
-            receivedTimePosition++;
-            if (receivedTimePosition > 4)
-            {
-                transmitMode = MODE_CONTROL;
-                return pCallbackShow(this);
+            if (currentLineIndex == 1) {
+                currentLineIndex = 0;
+                return;
             }
-        }
-        else if (transmitMode == MODE_READY && control == MODE_CHAR_END)
-        {
-            transmitMode = MODE_TIME_END;
+            digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
+
+            if (currentLineIndex > 30)
+                HandlePlatz();
+            else if (currentLineIndex < 19)
+                HandleShortCommands();
+            else if (currentLine[0] == '#')
+                HandleTeamComputerLong(0);
+            else if (currentLine[1] == '#')
+                HandleTeamComputerLong(1);
+            currentLineIndex = 0;
         }
     }
-    return;
 }
 
-uint8_t SerialControl::LastLine()
+void SerialControl::HandlePlatz()
 {
-    return receivedPart;
+    bool stopped;
+
+    stopped = HandlePlatzTime(0, currentLine[8], currentLine[9], currentLine[10]);
+    stopped = HandlePlatzTime(1, currentLine[12], currentLine[13], currentLine[14]) && stopped;
+
+    if (stoppable[0] && stopped)
+    {
+        if (recentReceivedTime[0] < recentReceivedTime[1])
+            lastDeciTime = recentReceivedTime[1];
+        else
+            lastDeciTime = recentReceivedTime[0];
+        pCallbackShow(lastDeciTime, 0);
+        stoppable[0] = false;
+
+        if (currentLine[5] == 0x02)
+        {
+            pCallbackShow(lastDeciTime, 1);
+            stoppable[1] = false;
+            return;
+        }
+    }
+
+    if (currentLine[5] == 0x04)
+    {
+        stopped = HandlePlatzTime(2, currentLine[16], currentLine[17], currentLine[18]);
+        stopped = HandlePlatzTime(3, currentLine[20], currentLine[21], currentLine[22]) && stopped;
+        if (stoppable[1] && stopped)
+        {
+            if (recentReceivedTime[2] < recentReceivedTime[3])
+                lastDeciTime = recentReceivedTime[3];
+            else
+                lastDeciTime = recentReceivedTime[2];
+            pCallbackShow(lastDeciTime, 1);
+            stoppable[1] = false;
+            return;
+        }
+    }
+
+    if (recentReceivedTime[0] == 0 && recentReceivedTime[1] == 0 && lastDeciTime != 0)
+    {
+        lastDeciTime = 0;
+        pCallbackWait();
+        stoppable[0] = true;
+        stoppable[1] = true;
+    }
 }
 
-char *SerialControl::LastCharTime()
+boolean SerialControl::HandlePlatzTime(uint8_t part, byte a, byte b, byte c)
 {
-    return receivedTime[receivedPart];
+    uint32_t time = ((int)a + (int)b * 256 + (int)c * 256 * 256) / 10;
+    boolean stopped = time != 0 && time == recentReceivedTime[part];
+    if (part == 0 && recentReceivedTime[part] == 0 && time > 0)
+    {
+        pCallbackStart();
+        stoppable[0] = true;
+        stoppable[1] = true;
+    }
+    recentReceivedTime[part] = time;
+    return stopped;
 }
 
-uint32_t SerialControl::LastDeciTime()
+// "1-0:18,03"
+// "2-0:22,04"
+// "s"
+// "w"
+void SerialControl::HandleShortCommands()
 {
-    uint32_t output = 0;
-    output += (receivedTime[receivedPart][4] - 48);
-    output += (receivedTime[receivedPart][3] - 48) * 10;
-    output += (receivedTime[receivedPart][2] - 48) * 100;
-    output += (receivedTime[receivedPart][1] - 48) * 1000;
-    output += (receivedTime[receivedPart][0] - 48) * 6000;
-    return output;
+    if (currentLine[0] == 's')
+    {
+        return pCallbackStart();
+    }
+    else if (currentLine[0] == 'w')
+    {
+        return pCallbackWait();
+    }
+    else if (currentLine[0] == '1' || currentLine[0] == '2')
+    {
+        lastDeciTime = 0;
+        lastDeciTime += (currentLine[2] - 48) * 6000;
+        lastDeciTime += (currentLine[4] - 48) * 1000;
+        lastDeciTime += (currentLine[5] - 48) * 100;
+        lastDeciTime += (currentLine[7] - 48) * 10;
+        lastDeciTime += (currentLine[8] - 48);
+        return pCallbackShow(lastDeciTime, currentLine[0] - 49);
+    }
+}
+
+// "#0:08,000|0:09,343*\r\n"
+void SerialControl::HandleTeamComputerLong(uint8_t start)
+{
+    lastDeciTime = 0;
+    lastDeciTime += (currentLine[start + 1] - 48) * 6000;
+    lastDeciTime += (currentLine[start + 3] - 48) * 1000;
+    lastDeciTime += (currentLine[start + 4] - 48) * 100;
+    lastDeciTime += (currentLine[start + 6] - 48) * 10;
+    lastDeciTime += (currentLine[start + 7] - 48);
+    pCallbackShow(lastDeciTime, 0);
+
+    lastDeciTime = 0;
+    lastDeciTime += (currentLine[start + 10] - 48) * 6000;
+    lastDeciTime += (currentLine[start + 12] - 48) * 1000;
+    lastDeciTime += (currentLine[start + 13] - 48) * 100;
+    lastDeciTime += (currentLine[start + 15] - 48) * 10;
+    lastDeciTime += (currentLine[start + 16] - 48);
+    pCallbackShow(lastDeciTime, 1);
 }

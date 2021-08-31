@@ -43,11 +43,11 @@ void loop()
   displayHandle.Handle();
 }
 
-void cbResult(SerialControl *control)
+void cbResult(uint32_t lastDeciTime, uint8_t lastLine)
 {
   char output[CHARS];
-  StopWatch::CentiSecondsToChars(control->LastDeciTime(), output);
-  displayHandle.StopTime(control->LastLine(), output);
+  StopWatch::CentiSecondsToChars(lastDeciTime, output);
+  displayHandle.StopTime(lastLine, output);
 }
 
 void cbStart()

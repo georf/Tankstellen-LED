@@ -9,4 +9,4 @@
 void cbStart();
 void cbStartOrStop();
 void cbWaiting();
-void cbResult(SerialControl* control);
+void cbResult(uint32_t lastDeciTime, uint8_t lastLine);
