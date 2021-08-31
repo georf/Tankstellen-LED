@@ -34,6 +34,7 @@ private:
     Display display;
     StopWatch stopWatch;
     uint32_t lastModusChange;
+    uint32_t lastBrightnessRead = 0;
     void Stop();
     void SetModus(Modus newModus);
     void PreShowing(uint8_t line, uint32_t sinceLastModusChange);

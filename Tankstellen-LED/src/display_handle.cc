@@ -12,13 +12,18 @@ void DisplayHandle::Handle()
     char output[CHARS];
     uint32_t sinceLastModusChange = millis() - lastModusChange;
     uint8_t index;
+
+    if (millis() - lastBrightnessRead > 200)
+    {
+        display.AddBrightnessValue(analogRead(pinBrightnessInput));
+        lastBrightnessRead = millis();
+    }
+
     switch (modus)
     {
     case WAITING:
         index = sinceLastModusChange % 1000 / 250;
         display.SetOutput(waitingLines[index], false);
-        if (index > 0)
-            display.AddBrightnessValue(analogRead(pinBrightnessInput));
         break;
 
     case RUNNING:
