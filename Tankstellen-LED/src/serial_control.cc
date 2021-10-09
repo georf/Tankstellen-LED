@@ -101,7 +101,10 @@ void SerialControl::HandlePlatz()
 
 boolean SerialControl::HandlePlatzTime(uint8_t part, byte a, byte b, byte c)
 {
-    uint32_t time = ((int)a + (int)b * 256 + (int)c * 256 * 256) / 10;
+    uint32_t a_i = (uint8_t)a;
+    uint32_t b_i = (uint8_t)b;
+    uint32_t c_i = (uint8_t)c;
+    uint32_t time = (a_i + b_i * 256 + c_i * 256 * 256) / 10;
     boolean stopped = time != 0 && time == recentReceivedTime[part];
     if (part == 0 && recentReceivedTime[part] == 0 && time > 0)
     {
